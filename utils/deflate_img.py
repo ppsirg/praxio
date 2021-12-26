@@ -1,5 +1,6 @@
 import os
 import htmlmin
+from urlib.parse import quote
 from jinja2 import Template
 from subprocess import call
 
@@ -28,7 +29,7 @@ def compress_img():
 
 
 def list_img()->list:
-    return [a for a in os.listdir('.') if is_img(a)]
+    return [quote(a.strip()) for a in os.listdir('.') if is_img(a.strip())]
 
 
 

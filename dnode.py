@@ -34,7 +34,7 @@ async def create_upload_files(bg: BackgroundTasks, files: List[UploadFile] = Fil
 
 @app.get("/")
 async def main():
-    async with aiofiles.open('dnodetemplate.html', 'r') as fl:
+    async with aiofiles.open('n_upload.html', 'r') as fl:
         txt = await fl.read()
     content = htmlmin.minify(txt, remove_comments=True, remove_empty_space=True)
     return HTMLResponse(content=content)

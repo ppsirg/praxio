@@ -1,30 +1,12 @@
-import os
+import aiofiles
 import htmlmin
-import aiofiles
 from typing import List
-import aiofiles
+from utils.file_managment import save_file
 from fastapi import FastAPI, File, UploadFile, BackgroundTasks
 from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
-def assert_destination(foldername:str)->str:
-    if not os.path.exists(foldername):
-        os.mkdir(foldername)
-    return foldername
-
-async def save_file(files):
-    for itm in files:
-        itm.file.seek(0)
-        destination = os.path.join(assert_destination('new_files'), itm.filename)
-        async with aiofiles.open(destination, 'wb') as fl:
-            stop = False
-            while not stop:
-                chunk = itm.file.read(5000)
-                if not chunk:
-                    stop = True
-                else:
-                    await fl.write(chunk)
 
 @app.post("/upload/")
 async def create_upload_files(bg: BackgroundTasks, files: List[UploadFile] = File(...)):

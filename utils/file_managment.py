@@ -1,8 +1,8 @@
 import os
-import aiofiles
+# import aiofiles
 from urllib.parse import quote
 
-img_extensions = ('.jpg', '.jpeg', '.png')
+img_extensions = ('.jpg', '.jpeg', '.png', '.mp4')
 
 
 def is_img(target:str, res:str)-> bool:

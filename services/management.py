@@ -3,7 +3,7 @@ import asyncio
 from enum import Enum
 from pydantic import BaseModel
 from typing import Optional
-
+from settings import db as mongo
 
 class ServiceType(Enum):
     blog= 'blog'
@@ -40,7 +40,8 @@ async def register_service(indexer_url:str, register:ServiceRegister):
 
 async def index_service(register:ServiceRegister):
     """Save register in search engine database to index it."""
-    pass
+    response = mongo['services'].insert_one(register.__dict__)
+    return response
 
 
 async def check_services():
@@ -48,5 +49,5 @@ async def check_services():
     services = []
     while True:
         for service in services:
-            print(service)
+            print(service) # in | motor  async no block petittions
         await asyncio.sleep(30)

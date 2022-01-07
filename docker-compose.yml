@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  db:
+    image: mongo
+    volumes:
+      - $PWD/db_data:/data/db
+  backend:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app/src
+ 

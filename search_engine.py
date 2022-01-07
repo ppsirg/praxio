@@ -1,9 +1,7 @@
 import asyncio
 from fastapi import FastAPI
-from services.management import ServiceRegister, check_services
-
-app = FastAPI()
-
+from services.management import ServiceRegister, check_services, index_service
+from settings import app
 
 @app.on_event("startup")
 async def launch_checking():
@@ -15,7 +13,8 @@ async def launch_checking():
 def register_service(register:ServiceRegister):
     """Allow a external site to register to be indexed in for search.
     """
-    pass
+    return index_service(register)
+    
 
 
 @app.get('/search/')
@@ -27,7 +26,7 @@ def search_service():
     description: str
     """
     pass
-
+    # [(url,description,owner)]
 
 @app.get('/')
 def service_index():

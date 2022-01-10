@@ -3,7 +3,7 @@ import htmlmin
 import aiofiles
 import asyncio
 from fastapi import FastAPI
-from services.management import ServiceRegister, check_services
+from services.management import ServiceRegister, check_services, index_service
 from fastapi.responses import HTMLResponse
 
 
@@ -18,10 +18,12 @@ async def launch_checking():
 
 
 @app.post('/register/')
-def register_service(register:ServiceRegister):
+async def register_service(register:ServiceRegister):
     """Allow a external site to register to be indexed in for search.
     """
-    pass
+    result = await index_service(register)
+    return result
+
 
 
 @app.get('/search/')

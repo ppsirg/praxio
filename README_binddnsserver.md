@@ -6,7 +6,7 @@
 ##los archivos son los siguientes: Las configuraciones aún no están apunto pero el servicio ya esta corriendo sin errores en su ejecución
 ##se trabaja en los errores que puedan haber en la configuración
 
-# contenido del archivo named.conf.local
+## contenido del archivo named.conf.local
 $ cat /etc/bind/named.conf.local
 
 //

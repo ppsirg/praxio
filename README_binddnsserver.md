@@ -8,11 +8,6 @@
 
 # contenido del archivo named.conf.local
 ## $ cat /etc/bind/named.conf.local
-// Do any local configuration here
-
-// Consider adding the 1918 zones here, if they are not used in your
-// organization
-//include "/etc/bind/zones.rfc1918";
 
 //zona directa para el dominio serverdns.com
 zone "serverdns.com"{

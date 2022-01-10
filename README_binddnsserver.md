@@ -6,12 +6,9 @@
 ##los archivos son los siguientes: Las configuraciones aún no están apunto pero el servicio ya esta corriendo sin errores en su ejecución
 ##se trabaja en los errores que puedan haber en la configuración
 
-## contenido del archivo named.conf.local
+# contenido del archivo named.conf.local
 ## $ cat /etc/bind/named.conf.local
-
-//
 // Do any local configuration here
-//
 
 // Consider adding the 1918 zones here, if they are not used in your
 // organization
@@ -30,7 +27,7 @@ zone "1.168.192.in-addr.arpa"{
 };
 
 
-## contenido del archivo named.conf.options
+# contenido del archivo named.conf.options
 ## $ cat /etc/bind/named.conf.options
 options {
         directory "/var/cache/bind";
@@ -58,8 +55,7 @@ options {
 };
 
 
-
-## contenido del archivo named.conf.defaults-zones
+# contenido del archivo named.conf.defaults-zones
 ## $ cat /etc/bind/named.conf.default-zones
 // prime the server with knowledge of the root servers
 zone "." {
@@ -90,7 +86,8 @@ zone "255.in-addr.arpa" {
         file "/etc/bind/db.255";
 };
 
-## contenido de la base de datos para la zona directa - archivo db.serverdns.com
+
+# contenido de la base de datos para la zona directa - archivo db.serverdns.com
 ## $ cat /etc/bind/db.serverdns.com
 ;
 ; BIND data file for local loopback interface
@@ -107,7 +104,8 @@ $TTL    604800
 ubuntu   IN     A       192.168.1.117
 monitor  IN     A       192.168.1.102
 
-## contenido de la base de datos para la zona inverza - archivo db.1.168.192
+
+# contenido de la base de datos para la zona inverza - archivo db.1.168.192
 ## $ cat /etc/bind/db.1.168.192
 ;
 ; BIND reverse data file for local loopback interface
@@ -126,9 +124,8 @@ $TTL    604800
 
 
 
-## se modificó el archivo /etc/hosts comentando la primera linea del archivo y añadiendo el FQDN de la máquina anfitrión
+# se modificó el archivo /etc/hosts comentando la primera linea del archivo y añadiendo el FQDN de la máquina anfitrión
 ## $ cat /etc/hosts
-
 #127.0.0.1 localhost
 192.168.1.117 ubuntu.serverdns.com ubuntu
 
@@ -141,7 +138,8 @@ ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
 
 
-$ cat /etc/netplan/50-cloud-init.yaml
+#  contenido de arvicho de configuración de red con /etc/netplan
+## $ cat /etc/netplan/50-cloud-init.yaml
 #This file is generated from information provided by the datasource.  Changes
 #to it will not persist across an instance reboot.  To disable cloud-init's
 #network configuration capabilities, write a file

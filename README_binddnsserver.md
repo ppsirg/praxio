@@ -7,7 +7,7 @@
 ##se trabaja en los errores que puedan haber en la configuración
 
 ## contenido del archivo named.conf.local
-$ cat /etc/bind/named.conf.local
+## $ cat /etc/bind/named.conf.local
 
 //
 // Do any local configuration here
@@ -30,8 +30,8 @@ zone "1.168.192.in-addr.arpa"{
 };
 
 
-# contenido del archivo named.conf.options
-$ cat /etc/bind/named.conf.options
+## contenido del archivo named.conf.options
+## $ cat /etc/bind/named.conf.options
 options {
         directory "/var/cache/bind";
 
@@ -59,8 +59,8 @@ options {
 
 
 
-# contenido del archivo named.conf.defaults-zones
-$ cat /etc/bind/named.conf.default-zones
+## contenido del archivo named.conf.defaults-zones
+## $ cat /etc/bind/named.conf.default-zones
 // prime the server with knowledge of the root servers
 zone "." {
         type hint;
@@ -90,8 +90,8 @@ zone "255.in-addr.arpa" {
         file "/etc/bind/db.255";
 };
 
-# contenido de la base de datos para la zona directa - archivo db.serverdns.com
-$ cat /etc/bind/db.serverdns.com
+## contenido de la base de datos para la zona directa - archivo db.serverdns.com
+## $ cat /etc/bind/db.serverdns.com
 ;
 ; BIND data file for local loopback interface
 ;
@@ -107,8 +107,8 @@ $TTL    604800
 ubuntu   IN     A       192.168.1.117
 monitor  IN     A       192.168.1.102
 
-# contenido de la base de datos para la zona inverza - archivo db.1.168.192
-$ cat /etc/bind/db.1.168.192
+## contenido de la base de datos para la zona inverza - archivo db.1.168.192
+## $ cat /etc/bind/db.1.168.192
 ;
 ; BIND reverse data file for local loopback interface
 ;
@@ -126,13 +126,13 @@ $TTL    604800
 
 
 
-# se modificó el archivo /etc/hosts comentando la primera linea del archivo y añadiendo el FQDN de la máquina anfitrión
-$ cat /etc/hosts
+## se modificó el archivo /etc/hosts comentando la primera linea del archivo y añadiendo el FQDN de la máquina anfitrión
+## $ cat /etc/hosts
 
 #127.0.0.1 localhost
 192.168.1.117 ubuntu.serverdns.com ubuntu
 
-# The following lines are desirable for IPv6 capable hosts
+#The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback
 fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
@@ -142,11 +142,11 @@ ff02::3 ip6-allhosts
 
 
 $ cat /etc/netplan/50-cloud-init.yaml
-# This file is generated from information provided by the datasource.  Changes
-# to it will not persist across an instance reboot.  To disable cloud-init's
-# network configuration capabilities, write a file
-# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
-# network: {config: disabled}
+#This file is generated from information provided by the datasource.  Changes
+#to it will not persist across an instance reboot.  To disable cloud-init's
+#network configuration capabilities, write a file
+#/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+#network: {config: disabled}
 network:
     version: 2
     renderer: networkd
@@ -157,8 +157,8 @@ network:
           nameservers:
             search: [serverdns.com]
             addresses: [8.8.8.8, 8.8.4.4]
-#            dhcp4: true
-#            optional: true
+//            dhcp4: true
+//            optional: true
 
 seguimos avanzando... -_-
 

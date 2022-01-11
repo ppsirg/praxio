@@ -1,10 +1,12 @@
-##configuraciones básicas para el funcionamineto de BIND9 en ubuntu server 20.04 LTS
-##vamos a configurar una ip estática a nuestro servidor en /etc/netplan/"nombre_del_archivo_de_configuración.yaml"
-##editaremos el archivo /etc/hosts
+# Configuraciones básicas para el funcionamineto de BIND9 en ubuntu server 20.04 LTS 
+Vamos a configurar una ip estática a nuestro servidor en /etc/netplan/"nombre_del_archivo_de_configuración.yaml"
 
-##se conocerán los archivos intervenidos para poner a punto el servicio de bind9
-##los archivos son los siguientes: Las configuraciones aún no están apunto pero el servicio ya esta corriendo sin errores en su ejecución
-##se trabaja en los errores que puedan haber en la configuración
+editaremos el archivo /etc/hosts
+
+Se conocerán los archivos intervenidos para poner a punto el servicio de bind9
+los archivos son los siguientes: 
+
+Las configuraciones ya están apunto y el servicio se esta ejecutando sin errores
 
 # contenido del archivo named.conf.local
 ## $ cat /etc/bind/named.conf.local

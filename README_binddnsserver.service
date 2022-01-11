@@ -1,15 +1,18 @@
 
-#configuraciones básicas para el funcionamineto de BIND9 en ubuntu server 20.04.3 LTS 
-#vamos a configurar una ip estática a nuestro servidor en /etc/netplan/"nombre_del_archivo_de_configuración.yaml"
-#editaremos el archivo /etc/hosts
-#Se conocerán los archivos intervenidos en el servidor DNS para poner a punto el servicio de bind9
-#los archivos son los siguientes: 
+###configuraciones básicas para el funcionamineto de BIND9 en ubuntu server 20.04.3 LTS 
+###configurar una ip estática a nuestro servidor en /etc/netplan/"nombre_del_archivo_de_configuración.yaml"
+###configuración de firewall ufw
+###editaremos el archivo /etc/hosts
+###se conocerán los archivos intervenidos en el servidor DNS para poner a punto el servicio de bind9
+###los archivos son los siguientes: 
 
 $ /etc/netplan/50-cloud-init.yaml
 $ /etc/bind/named.conf.local #aquí creamos la zona directa
 $ /etc/bind/db.ubuntudnsserver #archivo creado manualmente
 
 Las configuraciones ya están apunto y el servicio se esta ejecutando sin errores.
+
+###configuarciones en el servidor ubuntudnsserver - 192.168.1.115/24
 
 #configuración de IP fija en Ubuntudnsserver con /etc/netplan
 
@@ -37,6 +40,30 @@ network:
 #            optional: true
 #    version: 2
 
+#configuarcioń del firewall ufw en el servidor ubuntudnsserver
+
+ubuntu@ubuntudnsserver:/etc/bind$ sudo ufw status numbered 
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 80/tcp                     ALLOW IN    Anywhere                  
+[ 2] 443/tcp                    ALLOW IN    Anywhere                  
+[ 3] 22/tcp                     ALLOW IN    Anywhere                  
+[ 4] 53/udp                     ALLOW IN    Anywhere                  
+[ 5] Bind9                      ALLOW IN    Anywhere                  
+[ 6] Apache                     ALLOW IN    Anywhere                  
+[ 7] 54/tcp                     ALLOW IN    Anywhere                  
+[ 8] 54/udp                     ALLOW IN    Anywhere                  
+[ 9] 80/tcp (v6)                ALLOW IN    Anywhere (v6)             
+[10] 443/tcp (v6)               ALLOW IN    Anywhere (v6)             
+[11] 22/tcp (v6)                ALLOW IN    Anywhere (v6)             
+[12] 53/udp (v6)                ALLOW IN    Anywhere (v6)             
+[13] Bind9 (v6)                 ALLOW IN    Anywhere (v6)             
+[14] Apache (v6)                ALLOW IN    Anywhere (v6)             
+[15] 54/tcp (v6)                ALLOW IN    Anywhere (v6)             
+[16] 54/udp (v6)                ALLOW IN    Anywhere (v6) 
+
 #configuarción de zona directa ubuntudnsserver.com
 
 ubuntu@ubuntudnsserver:/etc/bind$ cat named.conf.local
@@ -52,4 +79,6 @@ zone "ubuntudnsserver.com" IN {
   type master;
   file "/etc/bind/db.ubuntudnsserver";
 };
+
+
 

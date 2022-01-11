@@ -80,5 +80,23 @@ zone "ubuntudnsserver.com" IN {
   file "/etc/bind/db.ubuntudnsserver";
 };
 
-
+#creación y configuración de la base de datos para la zona directa db.ubuntuserver
+ 
+ubuntu@ubuntudnsserver:/etc/bind$ cat db.ubuntudnsserver 
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	    IN	    SOA	                ubuntudnsserver.com. root.ubuntudnsserver.com. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	ubuntudnsserver.com.
+@	IN	A	192.168.1.115
+www     IN      CNAME   ubuntudnsserver.com.
+@	IN	MX	10 ubuntudnsserver.com.
+monitor IN      A       192.168.1.102
 

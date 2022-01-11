@@ -11,7 +11,7 @@ $ /etc/bind/db.ubuntudnsserver #archivo creado manualmente
 
 Las configuraciones ya están apunto y el servicio se esta ejecutando sin errores.
 
-# Configuración de IP fija en Ubuntudnsserver con /etc/netplan
+#configuración de IP fija en Ubuntudnsserver con /etc/netplan
 
 ubuntu@ubuntudnsserver:/etc/bind$ cat /etc/netplan/50-cloud-init.yaml 
 #This file is generated from information provided by the datasource.  Changes
@@ -37,4 +37,19 @@ network:
 #            optional: true
 #    version: 2
 
+#configuarción de zona directa ubuntudnsserver.com
+
+ubuntu@ubuntudnsserver:/etc/bind$ cat named.conf.local
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "ubuntudnsserver.com" IN {
+  type master;
+  file "/etc/bind/db.ubuntudnsserver";
+};
 

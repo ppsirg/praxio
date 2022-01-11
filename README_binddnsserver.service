@@ -1,31 +1,24 @@
 
-# Configuraciones básicas para el funcionamineto de BIND9 en ubuntu server 20.04.3 LTS 
-
-Vamos a configurar una ip estática a nuestro servidor en /etc/netplan/"nombre_del_archivo_de_configuración.yaml"
-
-editaremos el archivo /etc/hosts
-
-Se conocerán los archivos intervenidos en el servidor DNS para poner a punto el servicio de bind9
-los archivos son los siguientes: 
+#configuraciones básicas para el funcionamineto de BIND9 en ubuntu server 20.04.3 LTS 
+#vamos a configurar una ip estática a nuestro servidor en /etc/netplan/"nombre_del_archivo_de_configuración.yaml"
+#editaremos el archivo /etc/hosts
+#Se conocerán los archivos intervenidos en el servidor DNS para poner a punto el servicio de bind9
+#los archivos son los siguientes: 
 
 $ /etc/netplan/50-cloud-init.yaml
-
 $ /etc/bind/named.conf.local #aquí creamos la zona directa
-
 $ /etc/bind/db.ubuntudnsserver #archivo creado manualmente
-
 
 Las configuraciones ya están apunto y el servicio se esta ejecutando sin errores.
 
-
-1. Configuración de IP fija en Ubuntudnsserver con /etc/netplan
+# Configuración de IP fija en Ubuntudnsserver con /etc/netplan
 
 ubuntu@ubuntudnsserver:/etc/bind$ cat /etc/netplan/50-cloud-init.yaml 
-# This file is generated from information provided by the datasource.  Changes
-# to it will not persist across an instance reboot.  To disable cloud-init's
-# network configuration capabilities, write a file
-# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
-# network: {config: disabled}
+#This file is generated from information provided by the datasource.  Changes
+#to it will not persist across an instance reboot.  To disable cloud-init's
+#network configuration capabilities, write a file
+#/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+#network: {config: disabled}
 network:
   version: 2
   renderer: networkd

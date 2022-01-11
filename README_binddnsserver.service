@@ -87,7 +87,7 @@ ubuntu@ubuntudnsserver:/etc/bind$ cat db.ubuntudnsserver
 ; BIND data file for local loopback interface
 ;
 $TTL	604800
-@	    IN	    SOA	                ubuntudnsserver.com. root.ubuntudnsserver.com. (
+@	 IN    SOA      ubuntudnsserver.com. root.ubuntudnsserver.com. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry

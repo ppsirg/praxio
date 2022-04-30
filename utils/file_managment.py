@@ -1,8 +1,8 @@
 import os
-# import aiofiles
+import aiofiles
 from urllib.parse import quote
 
-img_extensions = ('.jpg', '.jpeg', '.png', '.mp4')
+img_extensions = ('.jpg', '.jpeg', '.png', '.mp4', '.webp')
 
 
 def is_img(target:str, res:str)-> bool:
@@ -27,6 +27,8 @@ def list_img_resources(target:str)->list:
 
 async def save_file(files):
     for itm in files:
+        if itm.filename.startswith('.trash'):
+            continue
         itm.file.seek(0)
         destination = os.path.join(assert_destination('new_files'), itm.filename)
         async with aiofiles.open(destination, 'wb') as fl:

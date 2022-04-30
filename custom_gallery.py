@@ -8,6 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 from utils.file_managment import list_img_resources
 from services.management import register_service_on_engine
 
+base_dir = os.path.abspath(os.path.dirname(__file__))
 target_directory = os.path.abspath('img_dummy')
 video_directory = os.path.abspath('vid_dummy')
 
@@ -16,16 +17,17 @@ app = FastAPI()
 
 @app.on_event("startup")
 async def launch_checking():
-    indexer_url = 'http://localhost:8000/register/'
-    service_info = {
-        "url": "http://miblog.com", 
-        "ip": "127.0.0.1", "port": 7020, 
-        "service_type": "gallery", 
-        "owner": "jose", 
-        "description": "servicio para ver tus fotos",
-        "content": "bienvenido"
-    }
-    indx = await register_service_on_engine(indexer_url, service_info)
+    # indexer_url = 'http://localhost:8000/register/'
+    # service_info = {
+    #     "url": "http://miblog.com", 
+    #     "ip": "127.0.0.1", "port": 7020, 
+    #     "service_type": "gallery", 
+    #     "owner": "jose", 
+    #     "description": "servicio para ver tus fotos",
+    #     "content": "bienvenido"
+    # }
+    # indx = await register_service_on_engine(indexer_url, service_info)
+    pass
 
 
 app.mount("/rs", StaticFiles(directory=target_directory), name="static")

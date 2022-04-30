@@ -5,20 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- dev  -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
     <!-- prod -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <title>viewer</title>
 </head>
 <body>
 <div id='app'>
-    <label for="savingfiles">Files to save</label>
-    <input type="file" multiple name="savingfiles" id="savingfiles" v-on:change='listFiles'>
-    <button v-on:click="uploadFiles">upload</button>
-    <p>[[to_upload_files]]</p>
-    <ul>
-        <li v-for='bt in batch' v:key='k'>[[bt.k]] files uploaded</li>
-    </ul>
+    <div class="control-container">
+        <label for="savingfiles">Files to save</label>
+        <input type="file" multiple name="savingfiles" id="savingfiles" v-on:change='listFiles'>
+        <button v-on:click="uploadFiles">upload</button>
+        <div>[[to_upload_files]]</div>
+    </div>
+    <div class="load-container">
+        <div class="load-progress" v-for='bt in batch' v:key='k'>[[bt.k]]</div>
+    </div>
 </div>
 
 <script>
@@ -34,6 +36,7 @@ var app = new Vue({
         this.to_upload_files = 'uploading in progress'
         let fileObj = document.getElementById('savingfiles')
         let rr = []
+        let count = 0
         for (let index = 0; index < fileObj.files.length; index++) {
             let itm = fileObj.files[index]
             console.log({itm});
@@ -41,14 +44,15 @@ var app = new Vue({
             ff.append('files', itm, itm.name)
             const bdy = {method: 'POST', body: ff}
             rr.push(fetch('/upload/', bdy))
-            if ((index % 5 == 0 && index != 0) || index == (fileObj.files.length -1)) {
+            if ((index % 3 == 0 && index != 0) || index == (fileObj.files.length -1)) {
                 const res = await Promise.all(rr)
-                console.log({res});
                 rr = []
                 this.batch.push({k: index})
+                this.to_upload_files = `uploaded ${index + 1} files`
             }
+            count = index + 1
         }
-        this.to_upload_files = 'upload finished'
+        this.to_upload_files = `uploaded ${count} files`
         fileObj.value = null
         this.batch = []
       },
@@ -64,6 +68,31 @@ var app = new Vue({
 html {
     max-width: 700px;
     margin: auto;
+}
+.load-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10px;
+    padding: 10px;
+}
+.load-progress {
+    min-width: 3em;
+    padding: 3px;
+    margin: 2px;
+    background-color: darkcyan;
+    color: white;
+    border: 2px solid darkblue;
+    border-radius: 5px;
+}
+button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.control-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 </style>
 </body>
